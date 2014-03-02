@@ -1,0 +1,534 @@
+Script started on Sun Mar  2 12:51:45 2014
+[?1034hbash-3.2$ rias[K[K[Kails console --sandbox
+Loading development environment in sandbox (Rails 4.0.2)
+Any modifications you make will be rolled back on exit
+[?1034h2.0.0-p353 :001 > User.new
+ => #<User id: nil, name: nil, email: nil, created_at: nil, updated_at: nil> 
+2.0.0-p353 :002 > user = [K[K[K[K[K[K[Kuser = User.new(name: "Michael Hartl", email: "mhartl@example. com")
+ => #<User id: nil, name: "Michael Hartl", email: "mhartl@example.com", created_at: nil, updated_at: nil> 
+2.0.0-p353 :003 > user.save
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (12.6ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Sun, 02 Mar 2014 18:53:45 UTC +00:00], ["email", "mhartl@example.com"], ["name", "Michael Hartl"], ["updated_at", Sun, 02 Mar 2014 18:53:45 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+ => true 
+2.0.0-p353 :004 > user
+ => #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45"> 
+2.0.0-p353 :005 > user.name
+ => "Michael Hartl" 
+2.0.0-p353 :006 > user.email
+ => "mhartl@example.com" 
+2.0.0-p353 :007 > User.create(name: "A Nother", email: "another@example.org")
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Sun, 02 Mar 2014 19:08:49 UTC +00:00], ["email", "another@example.org"], ["name", "A Nother"], ["updated_at", Sun, 02 Mar 2014 19:08:49 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+ => #<User id: 2, name: "A Nother", email: "another@example.org", created_at: "2014-03-02 19:08:49", updated_at: "2014-03-02 19:08:49"> 
+2.0.0-p353 :008 > foo = User.create(name: "Foo", email: "foo@bar.com")
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Sun, 02 Mar 2014 19:08:55 UTC +00:00], ["email", "foo@bar.com"], ["name", "Foo"], ["updated_at", Sun, 02 Mar 2014 19:08:55 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+ => #<User id: 3, name: "Foo", email: "foo@bar.com", created_at: "2014-03-02 19:08:55", updated_at: "2014-03-02 19:08:55"> 
+2.0.0-p353 :009 > foo.destroy
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "users" WHERE "users"."id" = ?  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+ => #<User id: 3, name: "Foo", email: "foo@bar.com", created_at: "2014-03-02 19:08:55", updated_at: "2014-03-02 19:08:55"> 
+2.0.0-p353 :010 > foo
+ => #<User id: 3, name: "Foo", email: "foo@bar.com", created_at: "2014-03-02 19:08:55", updated_at: "2014-03-02 19:08:55"> 
+2.0.0-p353 :011 > u[KUser.find(1)
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+ => #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45"> 
+2.0.0-p353 :012 > Usr[Ker.find(3)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+ActiveRecord::RecordNotFound: Couldn't find User with id=3
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:198:in `raise_record_not_found_exception!'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:284:in `find_one'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:268:in `find_with_ids'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:35:in `find'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-deprecated_finders-1.0.3/lib/active_record/deprecated_finders/relation.rb:122:in `find'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/querying.rb:3:in `find'
+	from (irb):12
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:90:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:9:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p353 :013 > User.find(3)
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+ActiveRecord::RecordNotFound: Couldn't find User with id=3
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:198:in `raise_record_not_found_exception!'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:284:in `find_one'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:268:in `find_with_ids'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/relation/finder_methods.rb:35:in `find'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-deprecated_finders-1.0.3/lib/active_record/deprecated_finders/relation.rb:122:in `find'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activerecord-4.0.2/lib/active_record/querying.rb:3:in `find'
+	from (irb):13
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:90:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:9:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p353 :014 > User.find_by_emia[K[Kail("User.find_by_email("mhartl@example.com")[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[KUser.find_by_email("mhartl@example.com")
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'mhartl@example.com' LIMIT 1[0m
+ => #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45"> 
+2.0.0-p353 :015 > User.find_by(email: "mhartl@example.com")
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'mhartl@example.com' LIMIT 1
+ => #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45"> 
+2.0.0-p353 :016 > User.first
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1[0m
+ => #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45"> 
+2.0.0-p353 :017 > User.all
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+ => #<ActiveRecord::Relation [#<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45">, #<User id: 2, name: "A Nother", email: "another@example.org", created_at: "2014-03-02 19:08:49", updated_at: "2014-03-02 19:08:49">]> 
+2.0.0-p353 :018 > user.email
+ => "mhartl@example.com" 
+2.0.0-p353 :019 > user.email = "foo@bar.com"
+ => "foo@bar.com" 
+2.0.0-p353 :020 > user.reload.email
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+ => "mhartl@example.com" 
+2.0.0-p353 :021 > user.email
+ => "mhartl@example.com" 
+2.0.0-p353 :022 > user
+ => #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 18:53:45"> 
+2.0.0-p353 :023 > i[Kuser.email
+ => "mhartl@example.com" 
+2.0.0-p353 :024 > ue[Kser.created_at
+ => Sun, 02 Mar 2014 18:53:45 UTC +00:00 
+2.0.0-p353 :025 > user.update_[Kd_at
+ => Sun, 02 Mar 2014 18:53:45 UTC +00:00 
+2.0.0-p353 :026 > useruser.email = "mhartl@example.net"
+NameError: undefined local variable or method `useruser' for main:Object
+	from (irb):26
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:90:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:9:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p353 :027 > user.email = "mhartl@example.net"
+ => "mhartl@example.net" 
+2.0.0-p353 :028 > user.save
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "users" SET "email" = ?, "updated_at" = ? WHERE "users"."id" = 1[0m  [["email", "mhartl@example.net"], ["updated_at", Sun, 02 Mar 2014 19:25:19 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+ => true 
+2.0.0-p353 :029 > user.created_at
+ => Sun, 02 Mar 2014 18:53:45 UTC +00:00 
+2.0.0-p353 :030 > user.updated_at
+ => Sun, 02 Mar 2014 19:25:19 UTC +00:00 
+2.0.0-p353 :031 > user.updte[K[Kate.[K_attribute(name:"The Duede[K[K[Kde", email:"dd[Kude@abides.org" )[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd_at[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_attribute(name:"The Dude", email:"dude@abides.org" [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd_at[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccreated_atupdated_at[K[K[K_[K[K_attribute(name:"The de[K[KDu[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kuser.update_attributes(name: "The Dude", email: "dude@abides.o rg")
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "users" SET "name" = ?, "email" = ?, "updated_at" = ? WHERE "users"."id" = 1  [["name", "The Dude"], ["email", "dude@abides.org"], ["updated_at", Sun, 02 Mar 2014 19:26:50 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+ => true 
+2.0.0-p353 :032 > user
+ => #<User id: 1, name: "The Dude", email: "dude@abides.org", created_at: "2014-03-02 18:53:45", updated_at: "2014-03-02 19:26:50"> 
+2.0.0-p353 :033 > user.name
+ => "The Dude" 
+2.0.0-p353 :034 > user.email
+ => "dude@abides.org" 
+2.0.0-p353 :035 > exit
+  [1m[35m (0.3ms)[0m  rollback transaction
+bash-3.2$ rails console --sandbox[C[C[C[C[C[C[C[C[C[Cbash[Krm 魔兽争霸3\(冰封王座\)+Dota\ for\ Mac完美无黑屏版.dmg [C[C[C[C[C[C[C[C[C[Ccd ~/Downloads/[K[C[C[C[C[C[C[C[C[C[Crm 魔兽争霸3\(冰封王座\)+Dota\ for\ Mac完美无黑屏版.dmg [C[C[C[C[C[C[C[C[C[Cbash[Krm 魔兽争霸3\(冰封王座\)+Dota\ for\ Mac完美无黑屏版.dmg [C[C[C[C[C[C[C[C[C[Ccd ~/Downloads/[K[C[C[C[C[C[C[C[C[C[Cbash[Kmate testCopen[C[C[C[C[C[Cmate[C[C[C[C[C[C[6Pbashcd ~/Downloads/[C[C[C[C[C[C[C[C[C[Crm 魔兽争霸3\(冰封王座\)+Dota\ for\ Mac完美无黑屏版.dmg [C[C[C[C[C[C[C[C[C[Ccd ~/Downloads/[K[C[C[C[C[C[C[C[C[C[Cbash[K[K[K[K[Krails console -- s[K[Ksandbox
+Loading development environment in sandbox (Rails 4.0.2)
+Any modifications you make will be rolled back on exit
+[?1034h2.0.0-p353 :001 > user
+NameError: undefined local variable or method `user' for main:Object
+	from (irb):1
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:90:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:9:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p353 :002 > bundle exec rake db:migrate[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kexit
+  [1m[35m (0.1ms)[0m  rollback transaction
+bash-3.2$ bundle exec rake db:migrate
+bash-3.2$ bundle exec rake test:prepare
+bash-3.2$ bundle exec rspec spec/models/user_spec.rb
+[33m*[0m
+
+Pending:
+[33m  User add some examples to (or delete) /Users/allendai/rails_projects/sample_app/spec/models/user_spec.rb[0m
+[36m    # No reason given[0m
+[36m    # ./spec/models/user_spec.rb:4[0m
+
+Finished in 0.00036 seconds
+[33m1 example, 0 failures, 1 pending[0m
+
+Randomized with seed 32198
+
+bash-3.2$ bundle exx[Kec re[Kspec spec/
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Finished in 0.36227 seconds
+[32m17 examples, 0 failures[0m
+
+Randomized with seed 36403
+
+bash-3.2$ ru[K[Krails console --sandbx[Kox
+Loading development environment in sandbox (Rails 4.0.2)
+Any modifications you make will be rolled back on exit
+[?1034h2.0.0-p353 :001 > user = User.new [K(name: "", email:"mhartl@exma[K[Kaml[Kple.com")
+ => #<User id: nil, name: "", email: "mhartl@example.com", created_at: nil, updated_at: nil> 
+2.0.0-p353 :002 > user.save[Ke
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+  [1m[36m (0.2ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+ => false 
+2.0.0-p353 :003 > user.valid?
+ => false 
+2.0.0-p353 :004 > user.errors.full)[K_message
+ArgumentError: wrong number of arguments (0 for 2)
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activemodel-4.0.2/lib/active_model/errors.rb:370:in `full_message'
+	from (irb):4
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:90:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands/console.rb:9:in `start'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/railties-4.0.2/lib/rails/commands.rb:62:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.0.0-p353 :005 > user.errors.full_messages
+ => ["Name can't be blank"] 
+2.0.0-p353 :006 > exit
+  [1m[35m (0.1ms)[0m  rollback transaction
+bash-3.2$ bundle exec rspec spec/models/user_spec.rb
+[32m.[0m[32m.[0m[32m.[0m[31mF[0m
+
+Failures:
+
+  1) User when name is not present 
+     [31mFailure/Error:[0m [31mit { should_not be_valid }[0m
+       [31mexpected #<User id: nil, name: " ", email: "user@example.com", created_at: nil, updated_at: nil> not to be valid[0m
+[36m     # ./spec/models/user_spec.rb:14:in `block (3 levels) in <top (required)>'[0m
+
+Finished in 0.01125 seconds
+[31m4 examples, 1 failure[0m
+
+Failed examples:
+
+[31mrspec ./spec/models/user_spec.rb:14[0m [36m# User when name is not present [0m
+
+Randomized with seed 60770
+
+bash-3.2$ bundle exec rspec spec/models/user_spec.rb
+[32m.[0m[32m.[0m[32m.[0m[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+[32m.[0m
+
+Finished in 0.01586 seconds
+[32m4 examples, 0 failures[0m
+
+Randomized with seed 58755
+
+bash-3.2$ bundle exec rspec spec/models/user_spec.rb
+[32m.[0m[32m.[0m[32m.[0m[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Finished in 0.02354 seconds
+[32m8 examples, 0 failures[0m
+
+Randomized with seed 37102
+
+bash-3.2$ rails generate migration add_index_to_users_email
+[1m[37m      invoke[0m  active_record
+[1m[32m      create[0m    db/migrate/20140302203800_add_index_to_users_email.rb
+bash-3.2$ bundle exec rake db:migrate
+==  AddIndexToUsersEmail: migrating ===========================================
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0006s
+==  AddIndexToUsersEmail: migrated (0.0007s) ==================================
+
+bash-3.2$ bundle install
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/..
+Resolving dependencies...
+Using rake (10.1.1)
+Using i18n (0.6.9)
+Using minitest (4.7.5)
+Using multi_json (1.8.4)
+Using atomic (1.1.14)
+Using thread_safe (0.1.3)
+Using tzinfo (0.3.38)
+Using activesupport (4.0.2)
+Using builder (3.1.4)
+Using erubis (2.7.0)
+Using rack (1.5.2)
+Using rack-test (0.6.2)
+Using actionpack (4.0.2)
+Using mime-types (1.25.1)
+Using polyglot (0.3.3)
+Using treetop (1.4.15)
+Using mail (2.5.4)
+Using actionmailer (4.0.2)
+Using activemodel (4.0.2)
+Using activerecord-deprecated_finders (1.0.3)
+Using arel (4.0.2)
+Using activerecord (4.0.2)
+Installing bcrypt-ruby (3.1.2)
+Using sass (3.2.14)
+Using bootstrap-sass (2.3.2.0)
+Using bundler (1.5.2)
+Using mini_portile (0.5.2)
+Using nokogiri (1.6.1)
+Using xpath (2.0.0)
+Using capybara (2.1.0)
+Using ffi (1.9.3)
+Using childprocess (0.4.2)
+Using coffee-script-source (1.7.0)
+Using execjs (2.0.2)
+Using coffee-script (2.2.0)
+Using thor (0.18.1)
+Using railties (4.0.2)
+Using coffee-rails (4.0.1)
+Using diff-lcs (1.2.5)
+Using hike (1.2.3)
+Using jbuilder (1.0.2)
+Using jquery-rails (3.0.4)
+Using json (1.8.1)
+Using tilt (1.4.1)
+Using sprockets (2.10.1)
+Using sprockets-rails (2.0.1)
+Using rails (4.0.2)
+Using rdoc (3.12.2)
+Using rspec-core (2.13.1)
+Using rspec-expectations (2.13.0)
+Using rspec-mocks (2.13.1)
+Using rspec-rails (2.13.1)
+Using rubyzip (0.9.9)
+Using sass-rails (4.0.1)
+Using sdoc (0.3.20)
+Using websocket (1.0.7)
+Using selenium-webdriver (2.35.1)
+Using sqlite3 (1.3.8)
+Using turbolinks (1.1.1)
+Using uglifier (2.1.1)
+[32mYour bundle is complete![0m
+[32mGems in the group production were not installed.[0m
+[32mUse `bundle show [gemname]` to see where a bundled gem is installed.[0m
+bash-3.2$ bud[Knn[Kdle install
+Using rake (10.1.1)
+Using i18n (0.6.9)
+Using minitest (4.7.5)
+Using multi_json (1.8.4)
+Using atomic (1.1.14)
+Using thread_safe (0.1.3)
+Using tzinfo (0.3.38)
+Using activesupport (4.0.2)
+Using builder (3.1.4)
+Using erubis (2.7.0)
+Using rack (1.5.2)
+Using rack-test (0.6.2)
+Using actionpack (4.0.2)
+Using mime-types (1.25.1)
+Using polyglot (0.3.3)
+Using treetop (1.4.15)
+Using mail (2.5.4)
+Using actionmailer (4.0.2)
+Using activemodel (4.0.2)
+Using activerecord-deprecated_finders (1.0.3)
+Using arel (4.0.2)
+Using activerecord (4.0.2)
+Using bcrypt-ruby (3.1.2)
+Using sass (3.2.14)
+Using bootstrap-sass (2.3.2.0)
+Using mini_portile (0.5.2)
+Using nokogiri (1.6.1)
+Using xpath (2.0.0)
+Using capybara (2.1.0)
+Using ffi (1.9.3)
+Using childprocess (0.4.2)
+Using coffee-script-source (1.7.0)
+Using execjs (2.0.2)
+Using coffee-script (2.2.0)
+Using thor (0.18.1)
+Using railties (4.0.2)
+Using coffee-rails (4.0.1)
+Using diff-lcs (1.2.5)
+Using hike (1.2.3)
+Using jbuilder (1.0.2)
+Using jquery-rails (3.0.4)
+Using json (1.8.1)
+Using bundler (1.5.2)
+Using tilt (1.4.1)
+Using sprockets (2.10.1)
+Using sprockets-rails (2.0.1)
+Using rails (4.0.2)
+Using rdoc (3.12.2)
+Using rspec-core (2.13.1)
+Using rspec-expectations (2.13.0)
+Using rspec-mocks (2.13.1)
+Using rspec-rails (2.13.1)
+Using rubyzip (0.9.9)
+Using sass-rails (4.0.1)
+Using sdoc (0.3.20)
+Using websocket (1.0.7)
+Using selenium-webdriver (2.35.1)
+Using sqlite3 (1.3.8)
+Using turbolinks (1.1.1)
+Using uglifier (2.1.1)
+[32mYour bundle is complete![0m
+[32mGems in the group production were not installed.[0m
+[32mUse `bundle show [gemname]` to see where a bundled gem is installed.[0m
+bash-3.2$ rails generate migration add_password_digest_to_users password_digest: string[A[C[C[C[Cbundle install[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crails generate migration add_password_digest_to_users password_digest:sstring[A[C[C[C[Cbundle install[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+bash-3.2$ rails generate migration add_password_digest_to_users password_digest: string[A[C[C[C[Cbundle install[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+Using rake (10.1.1)
+Using i18n (0.6.9)
+Using minitest (4.7.5)
+Using multi_json (1.8.4)
+Using atomic (1.1.14)
+Using thread_safe (0.1.3)
+Using tzinfo (0.3.38)
+Using activesupport (4.0.2)
+Using builder (3.1.4)
+Using erubis (2.7.0)
+Using rack (1.5.2)
+Using rack-test (0.6.2)
+Using actionpack (4.0.2)
+Using mime-types (1.25.1)
+Using polyglot (0.3.3)
+Using treetop (1.4.15)
+Using mail (2.5.4)
+Using actionmailer (4.0.2)
+Using activemodel (4.0.2)
+Using activerecord-deprecated_finders (1.0.3)
+Using arel (4.0.2)
+Using activerecord (4.0.2)
+Using bcrypt-ruby (3.1.2)
+Using sass (3.2.14)
+Using bootstrap-sass (2.3.2.0)
+Using mini_portile (0.5.2)
+Using nokogiri (1.6.1)
+Using xpath (2.0.0)
+Using capybara (2.1.0)
+Using ffi (1.9.3)
+Using childprocess (0.4.2)
+Using coffee-script-source (1.7.0)
+Using execjs (2.0.2)
+Using coffee-script (2.2.0)
+Using thor (0.18.1)
+Using railties (4.0.2)
+Using coffee-rails (4.0.1)
+Using diff-lcs (1.2.5)
+Using hike (1.2.3)
+Using jbuilder (1.0.2)
+Using jquery-rails (3.0.4)
+Using json (1.8.1)
+Using bundler (1.5.2)
+Using tilt (1.4.1)
+Using sprockets (2.10.1)
+Using sprockets-rails (2.0.1)
+Using rails (4.0.2)
+Using rdoc (3.12.2)
+Using rspec-core (2.13.1)
+Using rspec-expectations (2.13.0)
+Using rspec-mocks (2.13.1)
+Using rspec-rails (2.13.1)
+Using rubyzip (0.9.9)
+Using sass-rails (4.0.1)
+Using sdoc (0.3.20)
+Using websocket (1.0.7)
+Using selenium-webdriver (2.35.1)
+Using sqlite3 (1.3.8)
+Using turbolinks (1.1.1)
+Using uglifier (2.1.1)
+[32mYour bundle is complete![0m
+[32mGems in the group production were not installed.[0m
+[32mUse `bundle show [gemname]` to see where a bundled gem is installed.[0m
+bash-3.2$ rails generate migration add_password_digest_to_users password_digest: string
+[1m[37m      invoke[0m  active_record
+[1m[32m      create[0m    db/migrate/20140302204950_add_password_digest_to_users.rb
+bash-3.2$ bundle exec rake db:migrate
+==  AddPasswordDigestToUsers: migrating =======================================
+-- add_column(:users, :password_digest, :string)
+   -> 0.0031s
+==  AddPasswordDigestToUsers: migrated (0.0032s) ==============================
+
+bash-3.2$ bundle exec rake test:prepare
+bash-3.2$ bundle exec rspec spec/
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Finished in 0.37261 seconds
+[32m25 examples, 0 failures[0m
+
+Randomized with seed 5417
+
+bash-3.2$ bundle exec rspec spec/
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Finished in 0.3316 seconds
+[32m25 examples, 0 failures[0m
+
+Randomized with seed 45986
+
+bash-3.2$ budnl[K[K[Kndle exec rspec spec/
+/Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load': /Users/allendai/rails_projects/sample_app/spec/models/user_spec.rb:77: syntax error, unexpected keyword_end, expecting end-of-input (SyntaxError)
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `block in load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:214:in `load_dependency'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `block in load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `each'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/command_line.rb:22:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:80:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:17:in `block in autorun'
+bash-3.2$ pwd
+/Users/allendai/rails_projects/sample_app
+bash-3.2$ bundle exec rspec spec/
+/Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load': /Users/allendai/rails_projects/sample_app/spec/models/user_spec.rb:77: syntax error, unexpected keyword_end, expecting end-of-input (SyntaxError)
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `block in load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:214:in `load_dependency'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `block in load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `each'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/command_line.rb:22:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:80:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:17:in `block in autorun'
+bash-3.2$ bundle exec rspec spec/
+/Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load': /Users/allendai/rails_projects/sample_app/spec/models/user_spec.rb:99: syntax error, unexpected keyword_end, expecting end-of-input (SyntaxError)
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `block in load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:214:in `load_dependency'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `block in load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `each'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/command_line.rb:22:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:80:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:17:in `block in autorun'
+bash-3.2$ bundle exec rspec spec/
+/Users/allendai/rails_projects/sample_app/spec/models/user_spec.rb:12:in `<top (required)>': undefined method `subject' for main:Object (NoMethodError)
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `block in load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:214:in `load_dependency'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/activesupport-4.0.2/lib/active_support/dependencies.rb:223:in `load'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `block in load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `each'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/configuration.rb:819:in `load_spec_files'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/command_line.rb:22:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:80:in `run'
+	from /Users/allendai/.rvm/gems/ruby-2.0.0-p353@railstutorial_rails_4_0/gems/rspec-core-2.13.1/lib/rspec/core/runner.rb:17:in `block in autorun'
+bash-3.2$ bundle exec rspec spec/
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message.
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Finished in 0.39686 seconds
+[32m34 examples, 0 failures[0m
+
+Randomized with seed 60794
+
+bash-3.2$ rails [K console
+Loading development environment (Rails 4.0.2)
+[?1034h2.0.0-p353 :001 > User.create(name: "Michael Hartl", email: "mhartl@example.com" ,[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CUser.create(name: "Michael Hartl", email: "mhartl@example.com",,[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+2.0.0-p353 :002"> U[KUser.create(name: "Michael Hartl",email: "mhartl@example.com", [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K,
+2.0.0-p353 :003"> 
+2.0.0-p353 :004"> password: "foobar", password_confirmation: "foobar")
+2.0.0-p353 :005"> User.create(name:"Michael Hartl", email: "mhartl@example.com", passir[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
