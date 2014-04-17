@@ -28,12 +28,40 @@ describe "Static pages" do
                 visit root_path
               end
 
+              it "should have micropost count" do
+                expect(page).to have_content(user.microposts.count)
+            end
+            
+            it "should have plural term" do
+                expect(page).to have_content("microposts")
+    end
               it "should render the user's feed" do
                 user.feed.each do |item|
                   expect(page).to have_selector("li##{item.id}", text: item.content)
                 end
               end
+              
+              
             end
+            describe "testing for single post" do
+                  let(:user) { FactoryGirl.create(:user) }
+                  before do
+                    FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+                    FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+                    sign_in user
+                    visit root_path
+                  end 
+                  it "should have micropost count" do
+                    expect(page).to have_content(user.microposts.count)
+                end
+            
+                it "should have only one post" do
+                    expect(page).to have_content("micropost")
+        end 
+      end
+            
+            
+            
       end
 
       describe "Help page" do
