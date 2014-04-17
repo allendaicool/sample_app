@@ -5,6 +5,7 @@ describe "Micropost pages" do
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
+  let(:seconduser) { FactoryGirl.create(:user) }
   before { sign_in user }
 
   describe "pagination" do
@@ -53,6 +54,15 @@ describe "Micropost pages" do
       it "should create a micropost" do
         expect { click_button "Post" }.to change(Micropost, :count).by(1)
       end
+    end
+    
+    
+    describe "another user page" do
+      before do
+        FactoryGirl.create(:micropost, user: seconduser, content: "pokemon!")
+        visit user_path(seconduser)
+      end
+      it {should_not have_link('delete')}
     end
   end
 end
