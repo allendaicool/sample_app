@@ -47,6 +47,9 @@ describe User do
                expect(Micropost.where(id: micropost.id)).to be_empty
              end
            end
+           ###############EXE chapter 11
+          
+
 
 
 
@@ -87,6 +90,45 @@ describe User do
 
         it { should be_admin }
       end
+      ##########
+      describe "testing relationships destroy" do
+      let(:follower) { FactoryGirl.create(:user) }
+      
+      let(:followed) { FactoryGirl.create(:user) }
+      let!(:relationship) {follower.relationships.build(followed_id: followed.id)}
+      it "should destroy associated relationships"do
+      relationships = follower.relationships.to_a
+      
+      follower.destroy
+      
+      
+      expect(relationships).not_to be_empty
+        relationships.each do |relationship|
+          expect(Relationship.where(id: relationship.id)).to be_empty
+        end
+      end
+    end
+    ########################chapter 11 EXE
+    describe "testing relationships destroy" do
+    let(:follower) { FactoryGirl.create(:user) }
+    
+    let(:followed) { FactoryGirl.create(:user) }
+    let!(:reverserelationship) {followed.reverse_relationships.build(follower_id: follower.id)}
+    it "should destroy associated relationships"do
+    reverserelationships = followed.reverse_relationships.to_a
+    followed.destroy
+    
+    expect(reverserelationships).not_to be_empty
+    
+      reverserelationships.each do |r|
+        expect(Relationship.where(followed_id: followed.id)).to be_empty
+      end
+    end
+  end
+      
+      
+      
+      
       
       describe "following" do
           let(:other_user) { FactoryGirl.create(:user) }
